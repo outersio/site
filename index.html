@@ -657,17 +657,17 @@
   <div class="showcase-frame reveal">
     <div class="showcase-track-wrap" id="showcase-wrap">
       <div class="showcase-track" id="showcase-track">
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/beam-motion.mp4" muted loop playsinline autoplay aria-label="Beam motion ad creative by Outers"></video></div><span class="vcard-label">Beam — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/biodance-ugc.mp4" muted loop playsinline autoplay aria-label="Biodance UGC ad creative by Outers"></video></div><span class="vcard-label">Biodance — UGC</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/brez-motion.mp4" muted loop playsinline autoplay aria-label="Brez motion ad creative by Outers"></video></div><span class="vcard-label">Brez — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/cowboy-motion.mp4" muted loop playsinline autoplay aria-label="Cowboy motion ad creative by Outers"></video></div><span class="vcard-label">Cowboy — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/cure-ugc.mp4" muted loop playsinline autoplay aria-label="Cure UGC ad creative by Outers"></video></div><span class="vcard-label">Cure — UGC</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/deux-ugc.mp4" muted loop playsinline autoplay aria-label="Deux UGC ad creative by Outers"></video></div><span class="vcard-label">Deux — UGC</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/grind-motion.mp4" muted loop playsinline autoplay aria-label="Grind motion ad creative by Outers"></video></div><span class="vcard-label">Grind — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/gruns-motion.mp4" muted loop playsinline autoplay aria-label="Gruns motion ad creative by Outers"></video></div><span class="vcard-label">Gruns — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/gruns-ugc.mp4" muted loop playsinline autoplay aria-label="Gruns UGC ad creative by Outers"></video></div><span class="vcard-label">Gruns — UGC</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/magic-spoon-motion.mp4" muted loop playsinline autoplay aria-label="Magic Spoon motion ad creative by Outers"></video></div><span class="vcard-label">Magic Spoon — Motion</span></div>
-        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/mela-ugc.mp4" muted loop playsinline autoplay aria-label="Mela UGC ad creative by Outers"></video></div><span class="vcard-label">Mela — UGC</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/beam-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Beam motion ad creative by Outers"></video></div><span class="vcard-label">Beam — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/biodance-ugc.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Biodance UGC ad creative by Outers"></video></div><span class="vcard-label">Biodance — UGC</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/brez-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Brez motion ad creative by Outers"></video></div><span class="vcard-label">Brez — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/cowboy-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Cowboy motion ad creative by Outers"></video></div><span class="vcard-label">Cowboy — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/cure-ugc.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Cure UGC ad creative by Outers"></video></div><span class="vcard-label">Cure — UGC</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/deux-ugc.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Deux UGC ad creative by Outers"></video></div><span class="vcard-label">Deux — UGC</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/grind-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Grind motion ad creative by Outers"></video></div><span class="vcard-label">Grind — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/gruns-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Gruns motion ad creative by Outers"></video></div><span class="vcard-label">Gruns — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/gruns-ugc.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Gruns UGC ad creative by Outers"></video></div><span class="vcard-label">Gruns — UGC</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/magic-spoon-motion.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Magic Spoon motion ad creative by Outers"></video></div><span class="vcard-label">Magic Spoon — Motion</span></div>
+        <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/mela-ugc.mp4" muted loop playsinline webkit-playsinline preload="metadata" aria-label="Mela UGC ad creative by Outers"></video></div><span class="vcard-label">Mela — UGC</span></div>
       </div>
     </div>
   </div>
@@ -1021,6 +1021,42 @@
       requestAnimationFrame(updateSpotlight);
     }
     requestAnimationFrame(updateSpotlight);
+
+    // Chrome iOS is stricter than Safari: starting ~11 muted autoplays at once often fails.
+    // Play only near-visible clips, force muted/playsInline in JS, retry after first gesture.
+    const showcaseVideos = showcaseTrack.querySelectorAll('video');
+    function tryPlayVideo(video){
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+    showcaseVideos.forEach(video => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+    });
+    const videoIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) tryPlayVideo(video);
+        else video.pause();
+      });
+    }, { root: showcaseWrap, rootMargin: '0px 40% 0px 40%', threshold: 0.2 });
+    showcaseVideos.forEach(video => videoIo.observe(video));
+
+    function unlockShowcaseVideos(){
+      showcaseVideos.forEach(video => {
+        const rect = video.getBoundingClientRect();
+        const visible = rect.right > 0 && rect.left < window.innerWidth;
+        if (visible) tryPlayVideo(video);
+      });
+    }
+    window.addEventListener('touchstart', unlockShowcaseVideos, {passive:true, once:true});
+    window.addEventListener('scroll', unlockShowcaseVideos, {passive:true, once:true});
   }
 
   const svcItems = document.querySelectorAll('[data-svc]');
