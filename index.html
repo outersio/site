@@ -987,7 +987,12 @@
       if (!isDown) {
         const maxScroll = showcaseTrack.scrollWidth - showcaseWrap.clientWidth;
         if (maxScroll > 1) {
-          const speed = Math.max(0.75, showcaseWrap.clientWidth * 0.003);
+          // Desktop stays at the original calm pace; mobile gets a slight bump
+          // so larger phone cards still feel like they're drifting, not crawling.
+          const isMobile = window.matchMedia('(max-width:860px)').matches;
+          const speed = isMobile
+            ? Math.min(1.1, Math.max(0.75, showcaseWrap.clientWidth * 0.0025))
+            : 0.6;
           showcaseWrap.scrollLeft += speed;
           if (showcaseWrap.scrollLeft >= maxScroll - 1) showcaseWrap.scrollLeft = 0;
         }
