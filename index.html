@@ -171,17 +171,23 @@
     text-shadow:0 1px 8px rgba(255,255,255,0.6);
     z-index:2;
   }
-  .orbit{position:absolute; animation:spin 22s linear infinite;}
+  .orbit{position:absolute; inset:0; animation:spin 22s linear infinite;}
   .orbit-outer{inset:5%;}
   .orbit-inner{inset:20%;}
-  .orbit.reverse{animation-direction:reverse; animation-duration:30s;}
+  .orbit.reverse{
+    animation-name:spin-rev;
+    animation-duration:30s;
+    animation-direction:normal;
+  }
   @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes spin-rev{to{transform:rotate(-360deg);}}
   .node{
     --a:0deg;
     position:absolute;
     top:calc(50% - 50% * cos(var(--a)));
     left:calc(50% + 50% * sin(var(--a)));
     transform:translate(-50%,-50%);
+    transform-origin:center center;
     animation:counterspin 22s linear infinite;
     display:flex; align-items:center; gap:8px;
     background:rgba(255,255,255,0.9); border:1px solid rgba(18,17,20,0.1);
@@ -189,8 +195,13 @@
     color:var(--text-on-paper); white-space:nowrap;
     box-shadow:0 6px 18px rgba(18,17,20,0.06);
   }
-  .orbit.reverse .node{animation-duration:30s; animation-direction:reverse;}
+  .orbit.reverse .node{
+    animation-name:counterspin-rev;
+    animation-duration:30s;
+    animation-direction:normal;
+  }
   @keyframes counterspin{to{transform:translate(-50%,-50%) rotate(-360deg);}}
+  @keyframes counterspin-rev{to{transform:translate(-50%,-50%) rotate(360deg);}}
   .node-dot{width:7px; height:7px; border-radius:50%; flex-shrink:0;}
 
   /* VIDEO SHOWCASE */
