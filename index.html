@@ -974,12 +974,24 @@
   const howRows = document.querySelectorAll('[data-how]');
   const howImageInner = document.getElementById('how-image-inner');
   const howNumWatermark = document.getElementById('how-num-watermark');
+  function activateHow(row){
+    howRows.forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+    if (howImageInner) howImageInner.style.background = row.dataset.gradient;
+    if (howNumWatermark) howNumWatermark.textContent = row.dataset.num;
+  }
   howRows.forEach(row => {
     row.addEventListener('mouseenter', () => {
-      howRows.forEach(r => r.classList.remove('active'));
-      row.classList.add('active');
-      if (howImageInner) howImageInner.style.background = row.dataset.gradient;
-      if (howNumWatermark) howNumWatermark.textContent = row.dataset.num;
+      if (prefersHover()) activateHow(row);
+    });
+    row.addEventListener('click', () => {
+      if (prefersHover()) return;
+      const isActive = row.classList.contains('active');
+      if (isActive) {
+        row.classList.remove('active');
+        return;
+      }
+      activateHow(row);
     });
   });
 
