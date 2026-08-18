@@ -17,6 +17,10 @@
       document.head.appendChild(style);
     }
     style.textContent = [
+      '#cookie-banner.cookie-banner[hidden]{',
+      '  display:none !important;',
+      '  pointer-events:none !important;',
+      '}',
       '#cookie-banner.cookie-banner{',
       '  position:fixed !important;',
       '  left:50% !important;',
@@ -30,13 +34,13 @@
       '  padding:0 !important;',
       '  transform:translate(-50%, 12px) !important;',
       '  opacity:0;',
-      '  pointer-events:none;',
+      '  pointer-events:none !important;',
       '  transition:opacity .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1);',
       '}',
       '#cookie-banner.cookie-banner.is-visible{',
       '  opacity:1;',
       '  transform:translate(-50%, 0) !important;',
-      '  pointer-events:auto;',
+      '  pointer-events:auto !important;',
       '}',
       '#cookie-banner .cookie-banner-inner{',
       '  display:flex;',
