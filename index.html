@@ -216,9 +216,10 @@
     .showcase-frame{padding:0 20px;}
     .showcase-track{gap:16px;}
     .vcard{
-      flex:0 0 calc((100cqw - 16px) / 1.25);
+      flex:0 0 calc((100cqw - 16px) / 1.45);
       max-width:none;
     }
+    .vcard.spotlight{transform:scale(1.03);}
   }
   .showcase-track{padding:0 0 30px;}
   .vcard{position:relative; flex-shrink:0; transition:transform .35s cubic-bezier(.16,1,.3,1);}
@@ -890,16 +891,18 @@
   if (showcaseWrap && showcaseTrack) {
     let isDown = false, startX = 0, startScroll = 0;
 
+    function releaseDrag(){
+      isDown = false;
+      showcaseWrap.classList.remove('dragging');
+    }
+
     showcaseWrap.addEventListener('mousedown', (e) => {
       isDown = true;
       showcaseWrap.classList.add('dragging');
       startX = e.pageX;
       startScroll = showcaseWrap.scrollLeft;
     });
-    window.addEventListener('mouseup', () => {
-      isDown = false;
-      showcaseWrap.classList.remove('dragging');
-    });
+    window.addEventListener('mouseup', releaseDrag);
     window.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
@@ -910,30 +913,31 @@
       startX = e.touches[0].pageX;
       startScroll = showcaseWrap.scrollLeft;
     }, {passive:true});
-    showcaseWrap.addEventListener('touchend', () => {
-      isDown = false;
-    });
+    showcaseWrap.addEventListener('touchend', releaseDrag, {passive:true});
+    showcaseWrap.addEventListener('touchcancel', releaseDrag, {passive:true});
+    window.addEventListener('touchend', releaseDrag, {passive:true});
+    window.addEventListener('touchcancel', releaseDrag, {passive:true});
     showcaseWrap.addEventListener('touchmove', (e) => {
-      if (!isDown) return;
+      if (!isDown || !e.touches[0]) return;
       showcaseWrap.scrollLeft = startScroll - (e.touches[0].pageX - startX);
     }, {passive:true});
-    // Auto-scroll only pauses for the instant a drag is actively happening — resumes immediately on release, no delay
 
     function autoScroll(){
       if (!isDown) {
-        showcaseWrap.scrollLeft += 0.6;
         const maxScroll = showcaseTrack.scrollWidth - showcaseWrap.clientWidth;
-        if (showcaseWrap.scrollLeft >= maxScroll) showcaseWrap.scrollLeft = 0;
+        if (maxScroll > 1) {
+          const speed = Math.max(0.75, showcaseWrap.clientWidth * 0.003);
+          showcaseWrap.scrollLeft += speed;
+          if (showcaseWrap.scrollLeft >= maxScroll - 1) showcaseWrap.scrollLeft = 0;
+        }
       }
       requestAnimationFrame(autoScroll);
     }
     requestAnimationFrame(autoScroll);
 
-    const spotlightOffset = showcaseWrap.clientWidth / 2; // targets whichever card sits centered in view
-
     function updateSpotlight(){
       const cards = showcaseTrack.querySelectorAll('.vcard');
-      const targetX = showcaseWrap.scrollLeft + spotlightOffset;
+      const targetX = showcaseWrap.scrollLeft + showcaseWrap.clientWidth / 2;
       let closest = null, closestDist = Infinity;
       cards.forEach(card => {
         const cardCenter = card.offsetLeft + card.offsetWidth / 2;
