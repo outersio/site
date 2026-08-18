@@ -67,22 +67,22 @@
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
   :focus-visible{outline:2px solid var(--sky-deep); outline-offset:3px;}
 
-  /* NAV */
+  /* NAV — sized to the pill so we don't need pointer-events:none (Safari iOS
+     often fails hit-testing children when the fixed parent has pointer-events:none). */
   nav{
-    position:fixed; top:20px; left:0; right:0; z-index:100;
-    padding:0 32px;
-    pointer-events:none;
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    width:min(620px, calc(100% - 32px)); z-index:100;
+    padding:0;
   }
   .nav-row{
     display:flex; align-items:center; justify-content:space-between;
-    max-width:620px; margin:0 auto;
+    width:100%;
     background:#fff; border-radius:100px;
     padding:8px 8px 8px 22px;
     box-shadow:0 12px 32px rgba(18,17,20,0.09), 0 1px 0 rgba(18,17,20,0.03);
     border:1px solid rgba(18,17,20,0.04);
     transition:box-shadow .3s ease, padding .3s ease;
     gap:20px;
-    pointer-events:auto;
   }
   nav.scrolled .nav-row{
     box-shadow:0 16px 40px rgba(18,17,20,0.14), 0 1px 0 rgba(18,17,20,0.04);
@@ -175,8 +175,8 @@
   .hero p{
     font-size:18px; line-height:1.6; color:var(--text-on-paper-dim); max-width:460px; margin-bottom:38px;
   }
-  #hero-copy{min-width:0; max-width:100%;}
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  #hero-copy{min-width:0; max-width:100%; position:relative; z-index:3;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; position:relative; z-index:3;}
 
   /* SIGNAL RING (signature element) */
   .ring-stage{
@@ -500,7 +500,7 @@
       width:100%; max-width:420px;
     }
     .nav-links{display:none;}
-    nav{padding:0 16px;}
+    nav{width:calc(100% - 32px);}
     .nav-row{
       padding:12px 12px 12px 20px;
       gap:14px;
@@ -523,7 +523,7 @@
       <li><a class="nav-link" href="#showcase"><span class="dot"></span><span class="roll"><span class="roll-stack"><span>Work</span><span>Work</span></span></span></a></li>
       <li><a class="nav-link" href="#contact"><span class="dot"></span><span class="roll"><span class="roll-stack"><span>Contact</span><span>Contact</span></span></span></a></li>
     </ul>
-    <a class="btn btn-sky" href="https://calendar.app.google/pqRAV76Co6PsCHE27" target="_blank" rel="noopener noreferrer">Book a call →</a>
+    <a class="btn btn-sky" href="https://calendar.app.google/pqRAV76Co6PsCHE27">Book a call →</a>
   </div>
 </nav>
 
@@ -536,7 +536,7 @@
       </h1>
       <p class="reveal">Our creative intelligence system connects competitor, market, and performance signals to every stage of strategy, production, and iteration.</p>
       <div class="hero-ctas reveal">
-        <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" target="_blank" rel="noopener noreferrer" class="btn btn-sky">Book a call →</a>
+        <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-sky">Book a call →</a>
         <a href="#" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
@@ -853,7 +853,7 @@
     <div class="kicker" style="color:var(--text-on-paper-dim);">Let's Talk</div>
     <h2>Stop starting from a blank page</h2>
     <div class="cta-row">
-      <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Book a call →</a>
+      <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-dark">Book a call →</a>
       <a href="mailto:hello@outers.io" class="btn btn-ghost">hello@outers.io</a>
     </div>
   </div>
@@ -866,7 +866,7 @@
         <a class="logo logo-inverted" href="index.html"><img src="images/logo.png" alt="Outers logo" height="24"></a>
         <p style="color:var(--text-on-ink-dim); font-size:14px; margin-top:14px; max-width:260px;">Creative strategy, on autopilot.</p>
         <div class="footer-logo-row">
-          <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-sky" style="padding:9px 18px; font-size:13px;" target="_blank" rel="noopener noreferrer">Book a call</a>
+          <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-sky" style="padding:9px 18px; font-size:13px;">Book a call</a>
         </div>
       </div>
       <div class="footer-cols">
