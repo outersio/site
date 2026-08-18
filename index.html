@@ -943,12 +943,23 @@
   }
 
   const svcItems = document.querySelectorAll('[data-svc]');
+  function prefersHover(){
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  }
   function openSvc(i){
     svcItems.forEach(s => s.classList.remove('open'));
     svcItems[i].classList.add('open');
   }
   svcItems.forEach((item, i) => {
-    item.addEventListener('mouseenter', () => openSvc(i));
+    item.addEventListener('mouseenter', () => {
+      if (prefersHover()) openSvc(i);
+    });
+    item.addEventListener('click', () => {
+      if (prefersHover()) return;
+      const isOpen = item.classList.contains('open');
+      svcItems.forEach(s => s.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
   });
 
   const howRows = document.querySelectorAll('[data-how]');
