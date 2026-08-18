@@ -654,8 +654,8 @@
       <p style="margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; max-width:560px;">A sample of UGC, static, and motion creative shipped through the Outers pipeline. Drag to browse.</p>
     </div>
   </div>
-  <div class="showcase-frame">
-    <div class="showcase-track-wrap reveal" id="showcase-wrap">
+  <div class="showcase-frame reveal">
+    <div class="showcase-track-wrap" id="showcase-wrap">
       <div class="showcase-track" id="showcase-track">
         <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/beam-motion.mp4" muted loop playsinline autoplay aria-label="Beam motion ad creative by Outers"></video></div><span class="vcard-label">Beam — Motion</span></div>
         <div class="vcard"><div class="vcard-inner"><video src="videos/showcase/biodance-ugc.mp4" muted loop playsinline autoplay aria-label="Biodance UGC ad creative by Outers"></video></div><span class="vcard-label">Biodance — UGC</span></div>
@@ -951,9 +951,12 @@
   const showcaseTrack = document.getElementById('showcase-track');
   if (showcaseWrap && showcaseTrack) {
     let isDown = false, startX = 0, startScroll = 0, lastTouchAt = 0;
+    // Float accumulator — iOS truncates scrollLeft to ints, so += 0.6 never moves
+    let scrollPos = showcaseWrap.scrollLeft;
 
     function releaseDrag(){
       isDown = false;
+      scrollPos = showcaseWrap.scrollLeft;
       showcaseWrap.classList.remove('dragging');
     }
 
@@ -978,6 +981,7 @@
       isDown = true;
       startX = e.touches[0].pageX;
       startScroll = showcaseWrap.scrollLeft;
+      scrollPos = startScroll;
     }, {passive:true});
     // Release on window — finger often lifts outside the track after a page scroll
     window.addEventListener('touchend', releaseDrag, {passive:true});
@@ -985,20 +989,18 @@
     showcaseWrap.addEventListener('touchmove', (e) => {
       if (!isDown || !e.touches[0]) return;
       showcaseWrap.scrollLeft = startScroll - (e.touches[0].pageX - startX);
+      scrollPos = showcaseWrap.scrollLeft;
     }, {passive:true});
 
     function autoScroll(){
       if (!isDown) {
         const maxScroll = showcaseTrack.scrollWidth - showcaseWrap.clientWidth;
         if (maxScroll > 1) {
-          // Desktop stays at the original calm pace; mobile gets a slight bump
-          // so larger phone cards still feel like they're drifting, not crawling.
           const isMobile = window.matchMedia('(max-width:860px)').matches;
-          const speed = isMobile
-            ? Math.min(1.1, Math.max(0.75, showcaseWrap.clientWidth * 0.0025))
-            : 0.6;
-          showcaseWrap.scrollLeft += speed;
-          if (showcaseWrap.scrollLeft >= maxScroll - 1) showcaseWrap.scrollLeft = 0;
+          const speed = isMobile ? 1.15 : 0.6;
+          scrollPos += speed;
+          if (scrollPos >= maxScroll - 1) scrollPos = 0;
+          showcaseWrap.scrollLeft = scrollPos;
         }
       }
       requestAnimationFrame(autoScroll);
