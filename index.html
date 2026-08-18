@@ -283,9 +283,11 @@
   .how-list .how-row:first-child{border-top:none;}
   .how-row:has(+ .how-row.active){border-top-color:transparent;}
   .how-row.active{border-top-color:transparent;}
-  .how-row-title{display:flex; align-items:baseline; gap:18px;}
+  .how-row-head{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .how-row-title{display:flex; align-items:baseline; gap:18px; min-width:0;}
   .how-row-title h3{font-family:var(--sans); font-weight:400; font-size:18px; letter-spacing:0;}
   .how-row.active{background:linear-gradient(120deg, var(--paper-tint) 0%, #fff 75%); color:var(--text-on-paper);}
+  .how-row.active .step-chev{transform:rotate(45deg); background:var(--sky); border-color:var(--sky);}
   .how-panel{display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1);}
   .how-row.active .how-panel{grid-template-rows:1fr;}
   .how-panel-inner{overflow:hidden;}
@@ -651,7 +653,10 @@
         <div class="how-row active" data-how
              data-gradient="linear-gradient(160deg, var(--sky) 0%, var(--rose) 100%)"
              data-num="01">
-          <div class="how-row-title"><h3>Signal Analysis</h3></div>
+          <div class="how-row-head">
+            <div class="how-row-title"><h3>Signal Analysis</h3></div>
+            <div class="step-chev">＋</div>
+          </div>
           <div class="how-panel">
             <div class="how-panel-inner">
               <p class="how-desc">We analyze your brand, active competitor ads, and category signals to identify the messages, formats, and opportunities worth pursuing.</p>
@@ -661,7 +666,10 @@
         <div class="how-row" data-how
              data-gradient="linear-gradient(160deg, var(--rose) 0%, var(--sand) 100%)"
              data-num="02">
-          <div class="how-row-title"><h3>Creative Priorities</h3></div>
+          <div class="how-row-head">
+            <div class="how-row-title"><h3>Creative Priorities</h3></div>
+            <div class="step-chev">＋</div>
+          </div>
           <div class="how-panel">
             <div class="how-panel-inner">
               <p class="how-desc">Our internal system turns those signals into a prioritized testing plan, with clear reasoning behind every recommendation.</p>
@@ -671,7 +679,10 @@
         <div class="how-row" data-how
              data-gradient="linear-gradient(160deg, var(--sand) 0%, var(--sky) 100%)"
              data-num="03">
-          <div class="how-row-title"><h3>Creative Production</h3></div>
+          <div class="how-row-head">
+            <div class="how-row-title"><h3>Creative Production</h3></div>
+            <div class="step-chev">＋</div>
+          </div>
           <div class="how-panel">
             <div class="how-panel-inner">
               <p class="how-desc">We develop and produce launch-ready UGC, static, motion, and AI variations around each priority.</p>
@@ -681,7 +692,10 @@
         <div class="how-row" data-how
              data-gradient="linear-gradient(160deg, var(--sky-deep) 0%, var(--rose-deep) 100%)"
              data-num="04">
-          <div class="how-row-title"><h3>Analyze &amp; Iterate</h3></div>
+          <div class="how-row-head">
+            <div class="how-row-title"><h3>Analyze &amp; Iterate</h3></div>
+            <div class="step-chev">＋</div>
+          </div>
           <div class="how-panel">
             <div class="how-panel-inner">
               <p class="how-desc">Once performance data comes in, we identify what worked, what fatigued, and what to build next.</p>
