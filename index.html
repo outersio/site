@@ -950,7 +950,7 @@
   const showcaseWrap = document.getElementById('showcase-wrap');
   const showcaseTrack = document.getElementById('showcase-track');
   if (showcaseWrap && showcaseTrack) {
-    let isDown = false, startX = 0, startScroll = 0;
+    let isDown = false, startX = 0, startScroll = 0, lastTouchAt = 0;
 
     function releaseDrag(){
       isDown = false;
@@ -958,6 +958,8 @@
     }
 
     showcaseWrap.addEventListener('mousedown', (e) => {
+      // iOS fires a synthetic mousedown after touch; ignore it or auto-scroll stays paused
+      if (Date.now() - lastTouchAt < 900) return;
       isDown = true;
       showcaseWrap.classList.add('dragging');
       startX = e.pageX;
@@ -972,12 +974,14 @@
     });
     showcaseWrap.addEventListener('touchstart', (e) => {
       if (!e.touches[0]) return;
+      lastTouchAt = Date.now();
       isDown = true;
       startX = e.touches[0].pageX;
       startScroll = showcaseWrap.scrollLeft;
     }, {passive:true});
-    showcaseWrap.addEventListener('touchend', releaseDrag, {passive:true});
-    showcaseWrap.addEventListener('touchcancel', releaseDrag, {passive:true});
+    // Release on window — finger often lifts outside the track after a page scroll
+    window.addEventListener('touchend', releaseDrag, {passive:true});
+    window.addEventListener('touchcancel', releaseDrag, {passive:true});
     showcaseWrap.addEventListener('touchmove', (e) => {
       if (!isDown || !e.touches[0]) return;
       showcaseWrap.scrollLeft = startScroll - (e.touches[0].pageX - startX);
