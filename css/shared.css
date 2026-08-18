@@ -387,6 +387,14 @@ footer{background:var(--ink); color:var(--text-on-ink); padding:90px 0 40px; pos
 
 @media (max-width:860px){
   #nav .nav-links{display:none;}
+  #nav{padding:0 16px;}
+  #nav .nav-row{
+    padding:12px 12px 12px 20px;
+    gap:14px;
+  }
+  #nav.scrolled .nav-row{
+    padding:11px 11px 11px 18px;
+  }
   .cta-band{padding:80px 0;}
   .footer-top{flex-direction:column;}
   .cs-study-hero{padding:140px 0 28px;}
