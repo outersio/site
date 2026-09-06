@@ -309,9 +309,19 @@
 
   .how-layout{display:grid; grid-template-columns:0.85fr 1.15fr; gap:50px; align-items:start;}
   .how-visual{position:sticky; top:110px;}
-  .how-image{width:100%; aspect-ratio:4/3; border-radius:20px; overflow:hidden; box-shadow:0 20px 44px rgba(18,17,20,0.1);}
-  .how-image-inner{width:100%; height:100%; display:flex; align-items:center; justify-content:center; transition:background 1.2s ease;}
-  .how-num-watermark{font-family:var(--sans); font-size:110px; color:rgba(255,255,255,0.35); font-weight:400; letter-spacing:0; user-select:none;}
+  .how-image{width:100%; aspect-ratio:4/3; border-radius:20px; overflow:hidden; box-shadow:0 20px 44px rgba(18,17,20,0.1); position:relative; background:var(--paper-tint);}
+  .how-photo{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity .6s ease;
+  }
+  .how-photo.is-active{opacity:1;}
+  .how-num-watermark{
+    position:relative; z-index:1;
+    font-family:var(--sans); font-size:110px; color:rgba(255,255,255,0.55); font-weight:400;
+    letter-spacing:0; user-select:none;
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    text-shadow:0 8px 28px rgba(18,17,20,0.18);
+  }
 
   .how-list{display:flex; flex-direction:column; gap:14px;}
   .how-row{
@@ -800,15 +810,15 @@
     <div class="how-layout reveal">
       <div class="how-visual">
         <div class="how-image">
-          <div class="how-image-inner" id="how-image-inner" style="background:linear-gradient(160deg, var(--sky) 0%, var(--rose) 100%);">
-            <span class="how-num-watermark" id="how-num-watermark">01</span>
-          </div>
+          <img class="how-photo is-active" data-how-photo="01" src="images/how/signal-analysis.jpg" alt="" aria-hidden="true">
+          <img class="how-photo" data-how-photo="02" src="images/how/creative-priorities.jpg" alt="" aria-hidden="true">
+          <img class="how-photo" data-how-photo="03" src="images/how/creative-production.jpg" alt="" aria-hidden="true">
+          <img class="how-photo" data-how-photo="04" src="images/how/analyze-and-iterate.jpg" alt="" aria-hidden="true">
+          <span class="how-num-watermark" id="how-num-watermark">01</span>
         </div>
       </div>
       <div class="how-list" id="how-list">
-        <div class="how-row active" data-how
-             data-gradient="linear-gradient(160deg, var(--sky) 0%, var(--rose) 100%)"
-             data-num="01">
+        <div class="how-row active" data-how data-num="01">
           <div class="how-row-head">
             <div class="how-row-title"><h3>Signal Analysis</h3></div>
             <div class="step-chev">＋</div>
@@ -819,9 +829,7 @@
             </div>
           </div>
         </div>
-        <div class="how-row" data-how
-             data-gradient="linear-gradient(160deg, var(--rose) 0%, var(--sand) 100%)"
-             data-num="02">
+        <div class="how-row" data-how data-num="02">
           <div class="how-row-head">
             <div class="how-row-title"><h3>Creative Priorities</h3></div>
             <div class="step-chev">＋</div>
@@ -832,9 +840,7 @@
             </div>
           </div>
         </div>
-        <div class="how-row" data-how
-             data-gradient="linear-gradient(160deg, var(--sand) 0%, var(--sky) 100%)"
-             data-num="03">
+        <div class="how-row" data-how data-num="03">
           <div class="how-row-head">
             <div class="how-row-title"><h3>Creative Production</h3></div>
             <div class="step-chev">＋</div>
@@ -845,9 +851,7 @@
             </div>
           </div>
         </div>
-        <div class="how-row" data-how
-             data-gradient="linear-gradient(160deg, var(--sky-deep) 0%, var(--rose-deep) 100%)"
-             data-num="04">
+        <div class="how-row" data-how data-num="04">
           <div class="how-row-head">
             <div class="how-row-title"><h3>Analyze &amp; Iterate</h3></div>
             <div class="step-chev">＋</div>
@@ -1258,12 +1262,14 @@
   });
 
   const howRows = document.querySelectorAll('[data-how]');
-  const howImageInner = document.getElementById('how-image-inner');
+  const howPhotos = document.querySelectorAll('[data-how-photo]');
   const howNumWatermark = document.getElementById('how-num-watermark');
   function activateHow(row){
     howRows.forEach(r => r.classList.remove('active'));
     row.classList.add('active');
-    if (howImageInner) howImageInner.style.background = row.dataset.gradient;
+    howPhotos.forEach(photo => {
+      photo.classList.toggle('is-active', photo.dataset.howPhoto === row.dataset.num);
+    });
     if (howNumWatermark) howNumWatermark.textContent = row.dataset.num;
   }
   howRows.forEach(row => {
