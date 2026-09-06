@@ -315,13 +315,6 @@
     opacity:0; transition:opacity .6s ease;
   }
   .how-photo.is-active{opacity:1;}
-  .how-num-watermark{
-    position:relative; z-index:1;
-    font-family:var(--sans); font-size:110px; color:rgba(255,255,255,0.55); font-weight:400;
-    letter-spacing:0; user-select:none;
-    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
-    text-shadow:0 8px 28px rgba(18,17,20,0.18);
-  }
 
   .how-list{display:flex; flex-direction:column; gap:14px;}
   .how-row{
@@ -814,7 +807,6 @@
           <img class="how-photo" data-how-photo="02" src="images/how/creative-priorities.jpg" alt="" aria-hidden="true">
           <img class="how-photo" data-how-photo="03" src="images/how/creative-production.jpg" alt="" aria-hidden="true">
           <img class="how-photo" data-how-photo="04" src="images/how/analyze-and-iterate.jpg" alt="" aria-hidden="true">
-          <span class="how-num-watermark" id="how-num-watermark">01</span>
         </div>
       </div>
       <div class="how-list" id="how-list">
@@ -1263,14 +1255,12 @@
 
   const howRows = document.querySelectorAll('[data-how]');
   const howPhotos = document.querySelectorAll('[data-how-photo]');
-  const howNumWatermark = document.getElementById('how-num-watermark');
   function activateHow(row){
     howRows.forEach(r => r.classList.remove('active'));
     row.classList.add('active');
     howPhotos.forEach(photo => {
       photo.classList.toggle('is-active', photo.dataset.howPhoto === row.dataset.num);
     });
-    if (howNumWatermark) howNumWatermark.textContent = row.dataset.num;
   }
   howRows.forEach(row => {
     row.addEventListener('mouseenter', () => {
