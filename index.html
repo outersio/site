@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Outers — Performance Creative Agency for DTC Brands</title>
-<meta name="description" content="Performance creative agency specializing in creative strategy, UGC, static, motion, and 3D advertising for DTC brands.">
+<meta name="description" content="Performance creative for DTC brands, without the guesswork. We turn market, competitor, customer, and performance signals into a prioritized creative roadmap.">
 <link rel="canonical" href="https://www.outers.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Outers">
 <meta property="og:url" content="https://www.outers.io/">
 <meta property="og:title" content="Outers — Performance Creative Agency for DTC Brands">
-<meta property="og:description" content="Performance creative agency specializing in creative strategy, UGC, static, motion, and 3D advertising for DTC brands.">
+<meta property="og:description" content="Performance creative for DTC brands, without the guesswork. We turn market, competitor, customer, and performance signals into a prioritized creative roadmap.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
@@ -482,12 +482,64 @@
   .footer-prefs button:hover,
   .footer-prefs a:hover{color:var(--sky);}
 
+  /* WHY OUTERS — agency comparison */
+  .why-lead{margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; line-height:1.75; max-width:620px;}
+  .cmp{margin-top:56px; border:1px solid var(--paper-dim); border-radius:20px; overflow:hidden; background:#fff;}
+  .cmp-head{display:grid; grid-template-columns:1fr 1fr; background:var(--paper-tint);}
+  .cmp-head span{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    padding:16px 26px; color:var(--text-on-paper-dim);
+  }
+  .cmp-row{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--paper-dim);}
+  .cmp-row > div{padding:18px 26px; font-size:15px; line-height:1.6;}
+  .cmp-head span + span,
+  .cmp-row > div + div{border-left:1px solid var(--paper-dim);}
+  .cmp-head span + span{color:var(--text-on-paper);}
+  .cmp-a{color:var(--text-on-paper-dim);}
+  .cmp-b{color:var(--text-on-paper); background:linear-gradient(120deg, var(--paper-tint) 0%, #fff 85%);}
+
+  /* CREATIVE INTELLIGENCE — the four inputs */
+  .intel-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;}
+  .intel-card{
+    background:#fff; border:1px solid var(--paper-dim); border-radius:20px; padding:28px 24px;
+    display:flex; flex-direction:column; gap:12px;
+    transition:border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .intel-card:hover{border-color:var(--sky-deep); transform:translateY(-3px); box-shadow:0 14px 30px rgba(18,17,20,0.07);}
+  .intel-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--sky-deep);}
+  .intel-card h3{font-family:var(--sans); font-weight:400; font-size:18px; line-height:1.35;}
+  .intel-card p{font-size:14px; line-height:1.7; color:var(--text-on-paper-dim);}
+  .intel-foot{margin-top:34px; font-size:16px; line-height:1.7; color:var(--text-on-paper-dim); max-width:640px;}
+
+  /* COMPOUNDING LOOP band */
+  .loop-band{background:var(--paper-tint);}
+  .loop-inner{max-width:780px; margin:0 auto; text-align:center;}
+  .loop-inner h2{margin-bottom:24px;}
+  .loop-inner p{font-size:17px; line-height:1.75; color:var(--text-on-paper-dim);}
+  .loop-inner p + p{margin-top:16px;}
+
+  @media (max-width:1040px){
+    .intel-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+
   /* reveal on scroll */
   .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
   @media (max-width:860px){
     .wrap{padding:0 20px;}
+    .intel-grid{grid-template-columns:1fr;}
+    .cmp{margin-top:40px;}
+    .cmp-head{display:none;}
+    .cmp-row{grid-template-columns:1fr;}
+    .cmp-row > div{padding:14px 20px 16px;}
+    .cmp-row > div + div{border-left:none; border-top:1px solid var(--paper-dim);}
+    .cmp-a::before, .cmp-b::before{
+      display:block; font-family:var(--mono); font-size:10px; text-transform:uppercase;
+      letter-spacing:.08em; color:var(--text-on-paper-dim); margin-bottom:6px;
+    }
+    .cmp-a::before{content:"Traditional agency";}
+    .cmp-b::before{content:"Outers";}
     .hero{padding:140px 0 80px; overflow-x:clip;}
     .hero-grid, .signature-grid{grid-template-columns:1fr;}
     .hero-grid{min-height:0;}
@@ -544,12 +596,12 @@
     <div id="hero-copy">
       <h1 class="reveal" id="hero-h1">
         <span class="hline" id="hline1"><span class="hline-word">Performance</span> <span class="hline-word"><strong>Creative</strong></span></span>
-        <span class="hline" id="hline2"><em id="rotate-word">for Conversion</em></span>
+        <span class="hline" id="hline2"><em id="rotate-word">Without the Guesswork</em></span>
       </h1>
-      <p class="reveal">Our creative intelligence system connects competitor, market, and performance signals to every stage of strategy, production, and iteration.</p>
+      <p class="reveal">We turn market, competitor, customer, and performance signals into a prioritized creative roadmap &mdash; then produce it, test it, and learn from every result.</p>
       <div class="hero-ctas reveal">
         <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-sky">Book a call →</a>
-        <a href="#" class="btn btn-ghost">See how it works</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
     <div class="ring-stage reveal">
@@ -574,12 +626,31 @@
   </div>
 </header>
 
+<section id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Why Outers</div>
+      <h2>Most agencies make more ads. We work out which ads are worth making.</h2>
+      <p class="why-lead">Producing creative is rarely the bottleneck. Deciding what deserves to be produced next is. Before we make anything, we look at what&rsquo;s earning spend in your account, the language your customers actually use, the patterns already winning in your category, and the angles your competitors are leaving open &mdash; then turn that into a prioritized roadmap where every recommendation comes with a reason attached.</p>
+    </div>
+    <div class="cmp reveal">
+      <div class="cmp-head"><span>Traditional agency</span><span>Outers</span></div>
+      <div class="cmp-row"><div class="cmp-a">Starts with a brief</div><div class="cmp-b">Starts with signals</div></div>
+      <div class="cmp-row"><div class="cmp-a">Generates ideas</div><div class="cmp-b">Identifies opportunities</div></div>
+      <div class="cmp-row"><div class="cmp-a">Delivers assets</div><div class="cmp-b">Builds a testing system</div></div>
+      <div class="cmp-row"><div class="cmp-a">Measures performance</div><div class="cmp-b">Learns from performance</div></div>
+      <div class="cmp-row"><div class="cmp-a">Starts over each cycle</div><div class="cmp-b">Builds on every cycle before it</div></div>
+      <div class="cmp-row"><div class="cmp-a">Optimizes for output</div><div class="cmp-b">Optimizes for learning</div></div>
+    </div>
+  </div>
+</section>
+
 <section id="what-we-do">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Services</div>
       <h2>What We Do</h2>
-      <p style="margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; max-width:560px;">Our creative intelligence system connects competitor, market, and performance signals to every stage of strategy, production, and iteration.</p>
+      <p style="margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; max-width:560px;">Four connected services, run as one loop. Intelligence decides what to make, strategy shapes it, production builds it, and analysis determines what comes next.</p>
     </div>
     <div class="services-accordion reveal" id="services-accordion">
       <div class="svc open" data-tint="sky" data-svc>
@@ -685,12 +756,45 @@
   </div>
 </section>
 
+<section id="intelligence">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Creative Intelligence</div>
+      <h2>Four signals behind every recommendation</h2>
+      <p class="why-lead">&ldquo;Creative intelligence&rdquo; only means something if you can point at what it&rsquo;s reading. Here is exactly what we connect, and what each one answers.</p>
+    </div>
+    <div class="intel-grid reveal">
+      <div class="intel-card">
+        <div class="intel-label">Your account</div>
+        <h3>What&rsquo;s actually earning spend?</h3>
+        <p>Which creative is carrying the account, which is starting to fatigue, and which formats keep proving themselves once budget scales.</p>
+      </div>
+      <div class="intel-card">
+        <div class="intel-label">Your customer</div>
+        <h3>What language drives action?</h3>
+        <p>The problems, desires, and objections showing up in reviews and comments &mdash; in the words your customers use, not the ones marketing invents.</p>
+      </div>
+      <div class="intel-card">
+        <div class="intel-label">Your market</div>
+        <h3>What patterns dominate the category?</h3>
+        <p>The hooks, formats, and messages your audience has already been trained to respond to, and the conventions worth breaking on purpose.</p>
+      </div>
+      <div class="intel-card">
+        <div class="intel-label">Your competitors</div>
+        <h3>What are they testing and missing?</h3>
+        <p>What competitors are scaling, what they have quietly dropped, and the claims nobody in the category has taken yet.</p>
+      </div>
+    </div>
+    <p class="intel-foot reveal">Every recommendation we make traces back to at least one of these. None of them trace back to a hunch.</p>
+  </div>
+</section>
+
 <section id="how">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Our Process</div>
       <h2>How We Do</h2>
-      <p style="margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; max-width:560px;">Built on real signals, not assumptions. Strategy, production, and iteration stay connected so every creative decision has a clear reason behind it.</p>
+      <p style="margin-top:18px; color:var(--text-on-paper-dim); font-size:16px; max-width:560px;">Built on real signals, not assumptions. Every engagement runs the same loop &mdash; and each pass sharpens the next, because what we learn never gets thrown away.</p>
     </div>
     <div class="how-layout reveal">
       <div class="how-visual">
@@ -723,7 +827,7 @@
           </div>
           <div class="how-panel">
             <div class="how-panel-inner">
-              <p class="how-desc">Our internal system turns those signals into a prioritized testing plan, with clear reasoning behind every recommendation.</p>
+              <p class="how-desc">Our internal system turns those signals into a prioritized testing plan: what to make, why it should work, and what it is up against in the feed.</p>
             </div>
           </div>
         </div>
@@ -749,11 +853,22 @@
           </div>
           <div class="how-panel">
             <div class="how-panel-inner">
-              <p class="how-desc">Once performance data comes in, we identify what worked, what fatigued, and what to build next.</p>
+              <p class="how-desc">Once performance data comes in, we identify what worked, what fatigued, and why &mdash; then feed it straight back into the next round of priorities, so nothing starts from zero.</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="loop-band">
+  <div class="wrap reveal">
+    <div class="loop-inner">
+      <div class="kicker" style="color:var(--sky-deep);">The Compounding Part</div>
+      <h2>Creative shouldn&rsquo;t reset every time you make an ad.</h2>
+      <p>Every test produces information: what worked, what fatigued, which audience responded, which angle fell flat. In most setups that information dies with the campaign, and the next brief starts from instinct all over again.</p>
+      <p>We keep it. Each result becomes an input for the next round of priorities, which means the tenth cycle is making far better-informed decisions than the first. You do not just end up with more creative &mdash; you end up with a system that knows your market better the longer it runs.</p>
     </div>
   </div>
 </section>
@@ -926,7 +1041,7 @@
     <div class="footer-top">
       <div>
         <a class="logo logo-inverted" href="index.html"><img src="images/logo.png" alt="Outers logo" height="24"></a>
-        <p style="color:var(--text-on-ink-dim); font-size:14px; margin-top:14px; max-width:260px;">Creative strategy, on autopilot.</p>
+        <p style="color:var(--text-on-ink-dim); font-size:14px; margin-top:14px; max-width:260px;">Know what to make next.</p>
         <div class="footer-logo-row">
           <a href="https://calendar.app.google/pqRAV76Co6PsCHE27" class="btn btn-sky" style="padding:9px 18px; font-size:13px;">Book a call</a>
         </div>
@@ -988,7 +1103,7 @@
   fitHeroLines();
   window.addEventListener('resize', fitHeroLines);
 
-  const rotateWords = ['for Conversion', 'for Acquisition', 'for Scaling'];
+  const rotateWords = ['Without the Guesswork', 'Backed by Real Signals'];
   let rotateIndex = 0;
   const rotateEl = document.getElementById('rotate-word');
   if (rotateEl) {
