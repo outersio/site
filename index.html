@@ -313,16 +313,14 @@
   .how-image-inner{width:100%; height:100%; display:flex; align-items:center; justify-content:center; transition:background 1.2s ease;}
   .how-num-watermark{font-family:var(--sans); font-size:110px; color:rgba(255,255,255,0.35); font-weight:400; letter-spacing:0; user-select:none;}
 
-  .how-list{display:flex; flex-direction:column;}
+  .how-list{display:flex; flex-direction:column; gap:14px;}
   .how-row{
     display:flex; flex-direction:column;
-    padding:24px 26px; border-radius:16px; cursor:pointer;
-    transition:background .35s ease, color .35s ease;
-    border-top:1px solid var(--paper-dim);
+    padding:26px 30px; border-radius:20px; cursor:pointer;
+    background:#fff; border:1px solid var(--paper-dim);
+    transition:border-color .25s, background .5s ease, color .35s ease;
   }
-  .how-list .how-row:first-child{border-top:none;}
-  .how-row:has(+ .how-row.active){border-top-color:transparent;}
-  .how-row.active{border-top-color:transparent;}
+  .how-row:hover{border-color:var(--sky-deep);}
   .how-row-head{display:flex; align-items:center; justify-content:space-between; gap:16px;}
   .how-row-title{display:flex; align-items:baseline; gap:18px; min-width:0;}
   .how-row-title h3{font-family:var(--sans); font-weight:400; font-size:18px; letter-spacing:0;}
@@ -335,6 +333,7 @@
   @media (max-width:860px){
     .how-layout{grid-template-columns:1fr;}
     .how-visual{position:relative; top:0;}
+    .how-row{padding:22px 20px;}
   }
 
   /* SERVICES GRID */
@@ -503,9 +502,9 @@
   .intel-card{
     background:#fff; border:1px solid var(--paper-dim); border-radius:20px; padding:28px 24px;
     display:flex; flex-direction:column; gap:12px;
-    transition:border-color .25s, transform .25s, box-shadow .25s;
+    transition:border-color .25s, background .5s ease;
   }
-  .intel-card:hover{border-color:var(--sky-deep); transform:translateY(-3px); box-shadow:0 14px 30px rgba(18,17,20,0.07);}
+  .intel-card:hover{border-color:var(--sky-deep); background:linear-gradient(120deg, var(--paper-tint) 0%, #fff 75%);}
   .intel-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--sky-deep);}
   .intel-card h3{font-family:var(--sans); font-weight:400; font-size:18px; line-height:1.35;}
   .intel-card p{font-size:14px; line-height:1.7; color:var(--text-on-paper-dim);}
