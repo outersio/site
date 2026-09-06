@@ -490,12 +490,13 @@
   .cmp-head span{
     font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
     padding:16px 26px; color:var(--text-on-paper-dim);
+    display:flex; align-items:center; min-height:52px;
   }
+  .cmp-head-logo img{display:block; height:18px; width:auto;}
   .cmp-row{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--paper-dim);}
   .cmp-row > div{padding:18px 26px; font-size:15px; line-height:1.6;}
   .cmp-head span + span,
   .cmp-row > div + div{border-left:1px solid var(--paper-dim);}
-  .cmp-head span + span{color:var(--text-on-paper);}
   .cmp-a{color:var(--text-on-paper-dim);}
   .cmp-b{color:var(--text-on-paper); background:linear-gradient(120deg, var(--paper-tint) 0%, #fff 85%);}
 
@@ -537,11 +538,18 @@
     .cmp-row > div{padding:14px 20px 16px;}
     .cmp-row > div + div{border-left:none; border-top:1px solid var(--paper-dim);}
     .cmp-a::before, .cmp-b::before{
-      display:block; font-family:var(--mono); font-size:10px; text-transform:uppercase;
-      letter-spacing:.08em; color:var(--text-on-paper-dim); margin-bottom:6px;
+      display:block; margin-bottom:6px;
     }
-    .cmp-a::before{content:"Traditional agency";}
-    .cmp-b::before{content:"Outers";}
+    .cmp-a::before{
+      content:"Traditional agency";
+      font-family:var(--mono); font-size:10px; text-transform:uppercase;
+      letter-spacing:.08em; color:var(--text-on-paper-dim);
+    }
+    .cmp-b::before{
+      content:"";
+      width:78px; height:16px;
+      background:url('images/logo.png') left center / contain no-repeat;
+    }
     .hero{padding:140px 0 80px; overflow-x:clip;}
     .hero-grid, .signature-grid{grid-template-columns:1fr;}
     .hero-grid{min-height:0;}
@@ -636,7 +644,7 @@
       <p class="why-lead">Producing creative is rarely the bottleneck. Deciding what deserves to be produced next is. Before we make anything, we look at what&rsquo;s earning spend in your account, the language your customers actually use, the patterns already winning in your category, and the angles your competitors are leaving open, then turn that into a prioritized roadmap where every recommendation comes with a reason attached.</p>
     </div>
     <div class="cmp reveal">
-      <div class="cmp-head"><span>Traditional agency</span><span>Outers</span></div>
+      <div class="cmp-head"><span>Traditional agency</span><span class="cmp-head-logo"><img src="images/logo.png" alt="Outers" height="18"></span></div>
       <div class="cmp-row"><div class="cmp-a">Starts with a brief</div><div class="cmp-b">Starts with signals</div></div>
       <div class="cmp-row"><div class="cmp-a">Generates ideas</div><div class="cmp-b">Identifies opportunities</div></div>
       <div class="cmp-row"><div class="cmp-a">Delivers assets</div><div class="cmp-b">Builds a testing system</div></div>
